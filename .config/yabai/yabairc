@@ -1,0 +1,49 @@
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
+# bar padding
+yabai -m config external_bar all:$(($(sketchybar --query bar | jq .height) + 0)):0
+yabai -m config top_padding    28
+yabai -m config bottom_padding 12
+yabai -m config left_padding   12
+yabai -m config right_padding  12
+yabai -m config window_gap     12
+yabai -m config window_shadow off
+
+# layout and mouse
+yabai -m config layout bsp
+yabai -m config mouse_follows_focus off
+# yabai -m config focus_follows_mouse autoraise
+yabai -m config mouse_modifier cmd
+yabai -m config mouse_action1 move
+yabai -m config mouse_action2 resize
+
+# signals
+yabai -m signal --add event=space_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
+yabai -m signal --add event=display_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
+
+yabai -m space 1 --label unsorted
+yabai -m space 2 --label browser
+yabai -m space 3 --label code
+yabai -m space 4 --label terminal
+yabai -m space 5 --label chat
+yabai -m space 6 --label music
+yabai -m space 7 --label notes
+yabai -m space 8 --label unknown
+yabai -m space 9 --label other
+
+yabai -m rule --add app="^Finder$" space=1 manage=off
+yabai -m rule --add app="^Zen$" space=2
+yabai -m rule --add app="^Code$" space=3
+yabai -m rule --add app="^Warp$" space=4
+yabai -m rule --add app="^Terminal$" space=4
+yabai -m rule --add app="^WhatsApp$" space=5 manage=off
+yabai -m rule --add app="^Spotify$" space=6 manage=off
+yabai -m rule --add app="^Obsidian$" space=7
+yabai -m rule --add app="^Todoist$" space=7
+yabai -m rule --add app="^Preview$" space=1
+yabai -m rule --add app="^System Settings$" space=9 manage=off
+
+yabai -m config window_opacity on
+yabai -m config active_window_opacity 0.98
+yabai -m config normal_window_opacity 0.92
