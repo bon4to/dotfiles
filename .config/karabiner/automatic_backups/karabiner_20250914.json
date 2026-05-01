@@ -767,6 +767,10 @@
                             "to": [{ "apple_vendor_keyboard_key_code": "brightness_up" }]
                         },
                         {
+                            "from": { "key_code": "end" },
+                            "to": [{ "key_code": "vk_mission_control" }]
+                        },
+                        {
                             "from": { "key_code": "left_command" },
                             "to": [{ "key_code": "left_option" }]
                         },

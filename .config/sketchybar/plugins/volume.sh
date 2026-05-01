@@ -3,7 +3,7 @@
 if [ "$SENDER" = "volume_change" ]; then
   VOLUME="$INFO"
   # Icons to use
-  ICONS=("" "" "󰕾" "󰕾")
+  ICONS=("" "" "" "")
   # Set index based on specific thresholds
   if [ "$VOLUME" -eq 0 ]; then
     INDEX=0  # Muted
@@ -16,5 +16,5 @@ if [ "$SENDER" = "volume_change" ]; then
   fi
   # Get the corresponding icon
   ICON="${ICONS[$INDEX]}"
-  sketchybar --set "$NAME" icon="$ICON" label="$VOLUME%"
+  sketchybar --set "$NAME" icon="$ICON"
 fi

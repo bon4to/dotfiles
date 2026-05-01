@@ -1,12 +1,12 @@
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 
-sketchybar --bar position=top height=32 color=0x00000000 y_offset=14 corner_radius=10 padding_left=12 padding_right=12
+sketchybar --bar position=top height=32 color=0x00000000 y_offset=14 corner_radius=10 padding_left=14 padding_right=14
 
 default=(
   padding_left=16
   padding_right=16
-  icon.font="Monaspace Neon:Regular:20.0"
-  label.font="Monaspace Neon:Medium:14.0"
+  icon.font="JetBrainsMono Nerd Font:Regular:13.0"
+  label.font="Hack Nerd Font:Medium:13.0"
   icon.color=0xffeff1f5
   label.color=0xffeff1f5
   icon.padding_left=4
@@ -17,19 +17,25 @@ default=(
 sketchybar --default "${default[@]}"
 
 sketchybar --add item logo left \
-           --set logo update_freq=10 icon="" icon.padding_bottom=15 icon.padding_right=15 icon.padding_left=15 background.color=0x40000000 blur_radius=30 background.height=32 background.corner_radius=10 label.drawing=off icon.font.size=20 padding_left=0 padding_right=16
+           --set logo update_freq=10 icon="" \
+                            icon.padding_bottom=15 icon.padding_right=16 icon.padding_left=16 \
+                            background.color=0x40000000 blur_radius=30 background.height=32 \
+                            background.corner_radius=10 \
+                            label.drawing=off icon.font.size=20 \
+                            padding_left=0 padding_right=16
 
 # workspaces
 for sid in {1..9}; do
   # Default padding
   padding_left=5
   padding_right=5
+  icon.font="JetBrainsMono Nerd Font:Regular:11.0"
   
   # Special padding for first and last space
   if [ "$sid" -eq 1 ]; then
-    padding_left=15
+    padding_left=16
   elif [ "$sid" -eq 9 ]; then
-    padding_right=15
+    padding_right=16
   fi
 
   space=(
@@ -51,11 +57,13 @@ done
 
 sketchybar --add bracket spaces '/space\..*/' \
            --set spaces background.color=0x40000000 blur_radius=30  \
+                        icon.font.size=14 \
                         background.height=32 \
                         background.corner_radius=10
 
 sketchybar --add item clock right \
-           --set clock update_freq=10 icon="󰥔" script="$PLUGIN_DIR/clock.sh" label.padding_right=10 icon.padding_left=10 icon.font.size=22
+           --set clock update_freq=10 script="$PLUGIN_DIR/clock.sh" \
+                        label.padding_right=10 label.padding_left=10
 
 sketchybar --add bracket clock \
            --set clock background.color=0x40000000 blur_radius=30  \
@@ -63,25 +71,19 @@ sketchybar --add bracket clock \
                         background.corner_radius=10 \
                         padding_right=0
 
-sketchybar --add item date right \
-           --set date update_freq=10 icon="" script="$PLUGIN_DIR/date.sh" label.padding_right=10 icon.padding_left=10 icon.font.size=22
-
-sketchybar --add bracket date \
-           --set date background.color=0x40000000 blur_radius=30  \
-                        background.height=32 \
-                        background.corner_radius=10 \
-                        padding_right=0
-
-sketchybar --add item battery right \
-           --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" padding_left=2 padding_right=10 icon.font.size=16 \
-           --subscribe battery system_woke power_source_change \
-           --add item volume right \
-           --set volume script="$PLUGIN_DIR/volume.sh" padding_left=10 padding_right=2 \
-           --subscribe volume volume_change
+sketchybar --add item volume right \
+           --set volume script="$PLUGIN_DIR/volume.sh" \
+                        padding_left=4 padding_right=0 \
+           --subscribe volume volume_change \
+           --add item battery right \
+           --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
+                        padding_left=10 padding_right=4 icon.font.size=16 \
+           --subscribe battery system_woke power_source_change            
 
 sketchybar --add bracket controls volume battery \
-           --set controls background.color=0x40000000 blur_radius=30  \
+           --set controls background.color=0x40000000 \
+                        blur_radius=30  \
                         background.height=32 \
-                        background.corner_radius=10
+                        background.corner_radius=10 
 
 sketchybar --update

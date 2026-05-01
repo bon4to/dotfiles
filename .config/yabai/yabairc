@@ -45,5 +45,5 @@ yabai -m rule --add app="^Preview$" space=1
 yabai -m rule --add app="^System Settings$" space=9 manage=off
 
 yabai -m config window_opacity on
-yabai -m config active_window_opacity 0.98
+yabai -m config active_window_opacity 0.99
 yabai -m config normal_window_opacity 0.92
